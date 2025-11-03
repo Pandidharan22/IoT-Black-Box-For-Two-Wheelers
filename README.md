@@ -1,67 +1,48 @@
-# IoT Black Box System for Two-Wheelers
+# IoT Black Box for Two Wheelers 🏍️
 
-A cloud-based IoT system for motorcycle accident detection, analysis, and emergency response, following AIS-140 guidelines and DPDP compliance.
+An advanced IoT-based black box system designed for two-wheelers, providing real-time telemetry, location tracking, and accident detection.
 
-## Project Overview
+## 🚀 Features
 
-This system provides a comprehensive solution for:
-- Real-time GPS tracking and telemetry collection
-- Automatic crash detection and emergency alerts
-- Trip history and forensics analysis
-- Over-the-air (OTA) firmware updates
-- DPDP-compliant data governance
+- **Real-time Telemetry Monitoring**
+  - GPS Location Tracking
+  - Speed Monitoring
+  - Acceleration & Gyroscopic Data
+  - Battery Level Monitoring
+  - Heading Information
 
-### Architecture
+- **Data Management**
+  - Secure Data Storage using InfluxDB
+  - Historical Data Analysis
+  - Real-time Data Streaming
+  - Location History Tracking
 
-The system consists of three main components:
+- **Security**
+  - JWT-based Authentication
+  - Rate Limiting Protection
+  - TLS Encryption Support
+  - CORS Protection
 
-1. **Edge Device (ESP32-based)**
-   - GPS/GNSS tracking
-   - IMU-based crash detection
-   - MQTT telemetry publishing
-   - OTA firmware updates
+## 🛠️ Tech Stack
 
-2. **Backend Server (Node.js)**
-   - MQTT broker integration
-   - Real-time data processing
-   - REST API for dashboard
-   - Device management
-   - Data storage (PostgreSQL + InfluxDB)
+- **Backend**
+  - Node.js + TypeScript
+  - Express.js
+  - MQTT Protocol
+  - InfluxDB (Time-series Database)
+  - PostgreSQL (User Management)
+  - Winston Logger
 
-3. **Web Dashboard (React)**
-   - Live tracking interface
-   - Trip history playback
-   - Crash event analysis
-   - Device management
-   - User management
+- **Authentication & Security**
+  - JWT Tokens
+  - Zod Validation
+  - TLS/SSL Encryption
 
-## Backend Server
-
-This repository contains the backend server implementation.
-
-### Technologies Used
-
-- Node.js & TypeScript
-- Express.js
-- MQTT (HiveMQ Cloud)
-- PostgreSQL (User/Device management)
-- InfluxDB (Time-series telemetry)
-- JWT Authentication
-- Winston Logger
-
-### Prerequisites
-
-- Node.js >= 18.0.0
-- PostgreSQL
-- InfluxDB
-- MQTT Broker (HiveMQ Cloud account)
-
-### Setup Instructions
+## 🔧 Installation & Setup
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/iot-black-box-backend.git
-   cd iot-black-box-backend
+   git clone https://github.com/Pandidharan22/IoT-Black-Box-For-Two-Wheelers.git
    ```
 
 2. Install dependencies:
@@ -69,35 +50,109 @@ This repository contains the backend server implementation.
    npm install
    ```
 
-3. Set up environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` with your configuration settings.
+3. Configure environment variables:
+   - Copy `.env.example` to `.env`
+   - Update the configuration values
 
-4. Start development server:
+4. Start the development server:
    ```bash
    npm run dev
    ```
 
-5. Build for production:
-   ```bash
-   npm run build
-   npm start
-   ```
+## 📝 Environment Variables
 
-### API Documentation
+Required environment variables:
 
-#### Authentication
-- POST `/api/v1/auth/register` - Register new user
-- POST `/api/v1/auth/login` - User login
-- POST `/api/v1/auth/refresh` - Refresh access token
+```env
+# Server Configuration
+NODE_ENV=development
+PORT=3000
+API_VERSION=v1
 
-#### Devices
-- GET `/api/v1/devices` - List all devices
-- POST `/api/v1/devices` - Register new device
-- GET `/api/v1/devices/:id` - Get device details
-- PUT `/api/v1/devices/:id` - Update device
+# JWT Configuration
+JWT_SECRET=<your-secret-key>
+JWT_EXPIRES_IN=24h
+
+# MQTT Configuration
+MQTT_BROKER_URL=<mqtt-broker-url>
+MQTT_USERNAME=<mqtt-username>
+MQTT_PASSWORD=<mqtt-password>
+MQTT_CLIENT_ID=<mqtt-client-id>
+MQTT_TLS_ENABLED=true/false
+
+# Database Configuration
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=<database-name>
+POSTGRES_USER=<database-user>
+POSTGRES_PASSWORD=<database-password>
+
+# InfluxDB Configuration
+INFLUXDB_URL=<influxdb-url>
+INFLUXDB_TOKEN=<your-token>
+INFLUXDB_ORG=<your-org>
+INFLUXDB_BUCKET=<your-bucket>
+```
+
+## 🌐 API Documentation
+
+### Telemetry Endpoints
+
+- **POST** `/api/v1/telemetry`
+  - Store telemetry data
+  - Requires authentication
+  - Rate limited
+
+- **GET** `/api/v1/telemetry/:deviceId`
+  - Get device telemetry data
+  - Query parameters: startTime, endTime
+  - Requires authentication
+
+- **GET** `/api/v1/telemetry/:deviceId/location`
+  - Get device's last known location
+  - Requires authentication
+
+## 🧪 Testing
+
+Run tests using:
+```bash
+npm test
+```
+
+## 📦 Project Structure
+
+```
+.
+├── src/
+│   ├── config/         # Configuration files
+│   ├── controllers/    # Request handlers
+│   ├── middleware/     # Express middleware
+│   ├── models/         # Database models
+│   ├── routes/         # API routes
+│   ├── services/       # Business logic
+│   ├── types/          # TypeScript types
+│   └── utils/          # Utility functions
+├── test/              # Test files
+└── docs/             # Documentation
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
+4. Push to the branch: `git push origin feature/AmazingFeature`
+5. Open a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ✨ Authors
+
+- **Pandidharan** - [GitHub Profile](https://github.com/Pandidharan22)
+
+---
 - DELETE `/api/v1/devices/:id` - Delete device
 
 #### Telemetry
