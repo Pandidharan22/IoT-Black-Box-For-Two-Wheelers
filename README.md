@@ -1,4 +1,4 @@
-# IoT Black Box for Two Wheelers 🏍️
+# IoT-Enabled Black Box System for Two-Wheeler Accident Detection and Analysis
 
 An advanced IoT-based black box system designed for two-wheelers, providing real-time telemetry, location tracking, and accident detection.
 
